@@ -1,0 +1,29 @@
+<div class="flex flex-column justify-content-center align-items-center align-content-center surface-100 h-screen">
+    <div
+        class="flex flex-column align-items-center py-4 border-round-lg surface-0 w-11 md:w-3 xl:w-3 h-28rem shadow-3 mb-6 gap-1 hover:shadow-6 fadeinleft animation-duration-1000"
+    >
+        <h1 class="text-800font-semibold text-4xl m-0">Welcome back</h1>
+        <span class="text-500 text-sm">Please log in or sign up</span>
+        <img src="../../../assets/shared/icons/transactionicon.png" alt="transaction" class="pt-2 w-4 h-4" />
+        <div class="flex flex-column gap-2 mt-4 w-8">
+            <input type="text" pInputText formControlName="text" placeholder="E-mail" class="" />
+
+            <p-password
+                id="password1"
+                type="password"
+                class="w-full"
+                [feedback]="false"
+                placeholder="Password"
+                styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+                [inputStyle]="{ width: '100%' }"
+                [toggleMask]="true"
+                [style]="{ width: '100%' }"
+            ></p-password>
+        </div>
+        <div class="flex flex-row justify-content-between mt-3 w-8">
+            <p-button label="Log in" icon="pi pi-sign-in" iconPos="right" styleClass="p-button-success"></p-button>
+            <p-button label="Sign up" icon="pi pi-user-plus" iconPos="right" styleClass="p-button-info"></p-button>
+        </div>
+    </div>
+</div>
+

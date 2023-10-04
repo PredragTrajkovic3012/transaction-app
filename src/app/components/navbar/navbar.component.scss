@@ -1,0 +1,9 @@
+::ng-deep .p-menubar {
+    height: 50px;
+
+    p-menubarsub {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
