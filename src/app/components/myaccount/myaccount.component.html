@@ -1,0 +1,22 @@
+<div class="flex flex-column align-items-center surface-100 h-screen">
+    <div class="flex flex-column py-4 border-round-lg surface-0 h-27rem w-11 md:w-3 xl:w-3 shadow-3 gap-1 hover:shadow-6 mt-6">
+        <div class="flex flex-row align-items-start align-content-start ml-4">
+            <img src="../../../assets/shared/icons/transactionAppLogo.png" alt="transaction" class="w-2rem h-2rem" />
+        </div>
+        <div class="flex flex-column align-content-center align-items-center">
+            <h1 class="text-800 font-semibold text-4xl m-0 hover:text-900">Hello, AccountName</h1>
+
+            <img
+                src="../../../assets/shared/icons/PT.jpg"
+                alt="transaction"
+                class="w-2 h-2 border-circle w-6rem h-6rem m-2 border-green-300 border-2 fadein animation-duration-1000"
+            />
+            <div class="border-round-md bg-green-200 hover:bg-green-300 mx-2 w-10">
+                <h4 class="text-white font-semibold text-lg px-4 text-center mb-0">Your current balance is:</h4>
+                <h4 class="text-white font-semibold text-2xl px-4 text-center mt-1">{{ accountAmount | currency }}</h4>
+            </div>
+            <p-button class="mt-4" label="Change amount" styleClass="p-button-outlined p-button-success" (onClick)="openEditAmountDialog()"></p-button>
+        </div>
+    </div>
+</div>
+

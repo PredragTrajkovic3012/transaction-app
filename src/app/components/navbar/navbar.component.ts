@@ -14,11 +14,13 @@ export class NavbarComponent implements OnInit {
             {
                 label: 'MyAccount',
                 icon: 'pi pi-fw pi-user',
-                styleClass: ''
+                styleClass: '',
+                routerLink: '/homepage'
             },
             {
                 label: 'Transactions',
-                icon: 'pi pi-fw pi-wallet'
+                icon: 'pi pi-fw pi-wallet',
+                routerLink: '/transactions'
             },
             {
                 label: 'Sign out',

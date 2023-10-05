@@ -1,0 +1,24 @@
+<form action="" [formGroup]="changeAmountFormGroup" (ngSubmit)="changeAccountAmount()">
+    <div class="flex flex-column align-items-center">
+        <p-inputNumber
+            inputId="integeronly"
+            placeholder="Account amount"
+            [inputStyle]="{ width: '100%' }"
+            [style]="{ width: '100%' }"
+            formControlName="accamount"
+        >
+        </p-inputNumber>
+
+        <div class="flex flex-row justify-content-center mt-3 w-8">
+            <p-button
+                label="Change amount"
+                icon="pi pi-database"
+                iconPos="right"
+                styleClass="p-button-success"
+                type="submit"
+                [disabled]="!changeAmountFormGroup.valid"
+            ></p-button>
+        </div>
+    </div>
+</form>
+
