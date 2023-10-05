@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { MessageService } from 'primeng/api'
-import { DialogService } from 'primeng/dynamicdialog'
 import { User } from 'src/app/models/user.model'
 import { AuthService } from 'src/app/services/auth.service'
 
@@ -17,7 +16,6 @@ export class SignupComponent implements OnInit, OnDestroy {
     constructor(
         private auth: AuthService,
         private messageService: MessageService,
-        private dialog: DialogService,
         private router: Router
     ) {}
 
@@ -37,7 +35,9 @@ export class SignupComponent implements OnInit, OnDestroy {
             surname: this.signUpFormGroup.value.surname,
             accamount: this.signUpFormGroup.value.accamount,
             email: this.signUpFormGroup.value.email,
-            password: this.signUpFormGroup.value.password
+            password: this.signUpFormGroup.value.password,
+            transactions: []
+            
         }
         this.auth.signUpUser(newUser).subscribe(
             newUser => {
@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit, OnDestroy {
                     this.signUpFormGroup.reset()
                     this.timeout = setTimeout(() => {
                         this.router.navigate(['login'])
-                    }, 5000)
+                    }, 3000)
                 }
             },
             err => {

@@ -4,13 +4,15 @@ import { SigninComponent } from './components/signin/signin.component'
 import { SignupComponent } from './components/signup/signup.component'
 import { MyaccountComponent } from './components/myaccount/myaccount.component'
 import { TransactionsComponent } from './components/transactions/transactions.component'
+import { AdminpanelComponent } from './components/adminpanel/adminpanel.component'
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'homepage', component: MyaccountComponent },
-    { path: 'transactions', component: TransactionsComponent }
+    { path: 'transactions', component: TransactionsComponent },
+    { path: 'adminpanel', component: AdminpanelComponent }
 ]
 
 @NgModule({

@@ -1,28 +1,41 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MessageService } from 'primeng/api'
 import { DialogService } from 'primeng/dynamicdialog'
 import { AmountEditComponent } from '../amount-edit/amount-edit.component'
+import { User } from 'src/app/models/user.model'
+import { AuthService } from 'src/app/services/auth.service'
+import { Subscription } from 'rxjs'
 
 @Component({
     selector: 'app-myaccount',
     templateUrl: './myaccount.component.html',
     styleUrls: ['./myaccount.component.scss']
 })
-export class MyaccountComponent implements OnInit {
-    accountAmount: number = 10000
+export class MyaccountComponent implements OnInit, OnDestroy {
+    userSub: Subscription
+    user: User = null
 
     constructor(
         private messageService: MessageService,
-        public dialog: DialogService
+        public dialog: DialogService,
+        private auth: AuthService
     ) {}
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.userSub = this.auth.user.subscribe(u => {
+            this.user = u
+            
+        })
+    }
+    ngOnDestroy(): void {
+        if (this.userSub) {
+            this.userSub.unsubscribe()
+        }
+    }
 
     openEditAmountDialog() {
         const dialogRef = this.dialog.open(AmountEditComponent, {
             header: 'Change your account amount',
-            data: {
-                currentAmount: this.accountAmount
-            }
+           
         })
         dialogRef.onClose.subscribe(result => {
             if (result) {

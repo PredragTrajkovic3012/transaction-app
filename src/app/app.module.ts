@@ -12,7 +12,9 @@ import { MyaccountComponent } from './components/myaccount/myaccount.component'
 import { TransactionsComponent } from './components/transactions/transactions.component'
 import { AmountEditComponent } from './components/amount-edit/amount-edit.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AdminpanelComponent } from './components/adminpanel/adminpanel.component'
+
 
 @NgModule({
     declarations: [
@@ -22,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http'
         NavbarComponent,
         MyaccountComponent,
         TransactionsComponent,
-        AmountEditComponent
+        AmountEditComponent,
+        AdminpanelComponent,
+        
     ],
     imports: [BrowserModule, AppRoutingModule, PrimengModule, ReactiveFormsModule, BrowserAnimationsModule, HttpClientModule],
     providers: [],

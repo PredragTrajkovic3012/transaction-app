@@ -1,5 +1,8 @@
+import { MessageService } from 'primeng/api'
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { User } from 'src/app/models/user.model'
+import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
     selector: 'app-signin',
@@ -8,7 +11,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SigninComponent implements OnInit {
     loginFormGroup: FormGroup | any
-    constructor() {}
+    constructor(
+
+        private auth: AuthService,
+        private messageService: MessageService
+    ) {}
 
     ngOnInit(): void {
         this.loginFormGroup = new FormGroup({
@@ -18,7 +25,26 @@ export class SigninComponent implements OnInit {
     }
 
     logInUser() {
-        console.log(this.loginFormGroup.value)
+        let user = null
+        this.auth.getAllUsers().subscribe(users => {
+            user = users.find((u: User) => {
+                return u.email === this.loginFormGroup.value.email && u.password === this.loginFormGroup.value.password
+            })
+            if (user) {
+                this.auth.handleAuthentication(user)
+            } else {
+                this.messageService.add({
+                    severity: 'error',
+                    closable: true,
+                    summary: 'Something went wrong!',
+                    detail: 'Check that you have entered the form correctly',
+                    life: 5000
+                })
+            }
+        })
+        
     }
+
+    
 }
 
