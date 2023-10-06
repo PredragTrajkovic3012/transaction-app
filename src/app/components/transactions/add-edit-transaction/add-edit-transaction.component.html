@@ -1,5 +1,5 @@
 <form action="" [formGroup]="addOrEditTransactionFormGroup" (ngSubmit)="submitForm()">
-    <div class="flex flex-column align-items-center h-screen gap-2 mt-3">
+    <div class="flex flex-column align-items-center gap-2 mt-3 border-round-lg surface-100 pt-4 pb-2">
         <input type="text" pInputText placeholder="purchedItem" class="w-10 md:w-3" formControlName="purchedItem" />
         <p-inputNumber
             inputId="integeronly"
@@ -10,6 +10,18 @@
             class="w-10 md:w-3"
         >
         </p-inputNumber>
+        <div
+            *ngIf="
+                addOrEditTransactionFormGroup.get('amountSpent').hasError('required') &&
+                addOrEditTransactionFormGroup.get('amountSpent').touched
+            "
+            class="p-error"
+        >
+            Transaction amount is required.
+        </div>
+        <div *ngIf="addOrEditTransactionFormGroup.get('amountSpent').hasError('insufficientFunds')" class="p-error">
+            Insufficient funds for this transaction.
+        </div>
         <p-calendar
             placeholder="Select date Time"
             formControlName="dateTime"

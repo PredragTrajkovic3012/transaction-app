@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from 'src/app/models/user.model'
 import { AuthService } from 'src/app/services/auth.service'
 
+import { HttpClient } from '@angular/common/http'
+
 @Component({
     selector: 'app-signin',
     templateUrl: './signin.component.html',
@@ -12,15 +14,14 @@ import { AuthService } from 'src/app/services/auth.service'
 export class SigninComponent implements OnInit {
     loginFormGroup: FormGroup | any
     constructor(
-
         private auth: AuthService,
         private messageService: MessageService
     ) {}
-
+    passwordRegEx = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-<>]).{8,}$/
     ngOnInit(): void {
         this.loginFormGroup = new FormGroup({
             email: new FormControl(null, [Validators.required, Validators.email]),
-            password: new FormControl(null, [Validators.required])
+            password: new FormControl(null, [Validators.required,Validators.pattern(this.passwordRegEx)])
         })
     }
 
@@ -42,9 +43,6 @@ export class SigninComponent implements OnInit {
                 })
             }
         })
-        
     }
-
-    
 }
 

@@ -3,7 +3,7 @@
     <div
         class="flex flex-column align-items-center py-4 border-round-lg surface-0 w-11 md:w-3 xl:w-3 shadow-3 mb-6 gap-1 hover:shadow-6 flipright animation-duration-500"
     >
-        <h1 class="text-800font-semibold text-4xl m-0">Create an account</h1>
+        <h1 class="text-800 font-semibold text-4xl m-0">Create an account</h1>
 
         <img src="../../../assets/shared/icons/signup.png" alt="transaction" class="pt-2 w-2 h-2" />
         <form
@@ -11,32 +11,92 @@
             class="w-full flex flex-column align-items-center"
             [formGroup]="signUpFormGroup"
             (ngSubmit)="signUpUser()"
+            autocomplete="nope"
         >
             <div class="flex flex-column gap-2 mt-4 w-8">
-                <input type="text" pInputText formControlName="name" placeholder="Name" />
-                <input type="text" pInputText formControlName="surname" placeholder="Surname" />
-                <p-inputNumber
-                    inputId="integeronly"
-                    placeholder="Account amount"
-                    [inputStyle]="{ width: '100%' }"
-                    [style]="{ width: '100%' }"
-                    formControlName="accamount"
-                >
-                </p-inputNumber>
-                <input type="text" pInputText formControlName="text" placeholder="E-mail" formControlName="email" />
+                <div class="p-field">
+                    <input type="text" pInputText formControlName="name" placeholder="Name" class="w-12" />
+                    <div
+                        *ngIf="signUpFormGroup.get('name').hasError('required') && signUpFormGroup.get('name').touched"
+                        class="p-error"
+                    >
+                        Name is required.
+                    </div>
+                </div>
 
-                <p-password
-                    id="password1"
-                    type="password"
-                    class="w-full"
-                    [feedback]="false"
-                    placeholder="Password"
-                    styleClass="p-password p-component p-inputwrapper p-input-icon-right"
-                    [inputStyle]="{ width: '100%' }"
-                    [toggleMask]="true"
-                    [style]="{ width: '100%' }"
-                    formControlName="password"
-                ></p-password>
+                <div class="p-field">
+                    <input type="text" pInputText formControlName="surname" placeholder="Surname" class="w-12" />
+                    <div
+                        *ngIf="signUpFormGroup.get('surname').hasError('required') && signUpFormGroup.get('surname').touched"
+                        class="p-error"
+                    >
+                        Surname is required.
+                    </div>
+                </div>
+
+                <div class="p-field">
+                    <p-inputNumber
+                        inputId="integeronly"
+                        placeholder="Account amount"
+                        [inputStyle]="{ width: '100%' }"
+                        [style]="{ width: '100%' }"
+                        formControlName="accamount"
+                        class="w-12"
+                    >
+                    </p-inputNumber>
+                    <div
+                        *ngIf="signUpFormGroup.get('accamount').hasError('required') && signUpFormGroup.get('accamount').touched"
+                        class="p-error"
+                    >
+                        Account amount is required.
+                    </div>
+                </div>
+
+                <div class="p-field">
+                    <input type="text" pInputText formControlName="email" placeholder="E-mail" class="w-12" autocomplete="off" />
+                    <div
+                        *ngIf="signUpFormGroup.get('email').hasError('required') && signUpFormGroup.get('email').touched"
+                        class="p-error"
+                    >
+                        Email is required.
+                    </div>
+                    <div
+                        *ngIf="signUpFormGroup.get('email').hasError('email') && signUpFormGroup.get('email').touched"
+                        class="p-error"
+                    >
+                        Invalid email format.
+                    </div>
+                    <div *ngIf="signUpFormGroup.get('email').hasError('emailTaken')" class="p-error">Email is already taken.</div>
+                </div>
+
+                <div class="p-field">
+                    <p-password
+                        id="password1"
+                        type="password"
+                        class="w-full"
+                        [feedback]="false"
+                        placeholder="Password"
+                        styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+                        [inputStyle]="{ width: '100%' }"
+                        [toggleMask]="true"
+                        [style]="{ width: '100%' }"
+                        formControlName="password"
+                        autocomplete="nope"
+                    ></p-password>
+                    <div
+                        *ngIf="signUpFormGroup.get('password').hasError('required') && signUpFormGroup.get('password').touched"
+                        class="p-error"
+                    >
+                        Password is required.
+                    </div>
+                    <div
+                        *ngIf="signUpFormGroup.get('password').hasError('pattern') && signUpFormGroup.get('password').touched"
+                        class="p-error text-sm"
+                    >
+                        Password should be at least 8 characters long and should contain one number,one uppercase character and
+                        one special character.
+                    </div>
+                </div>
             </div>
             <div class="flex flex-row justify-content-between mt-3 w-8">
                 <p-button
