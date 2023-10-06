@@ -13,9 +13,7 @@ const httpOptions = {
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService implements OnInit 
-{
-
+export class AuthService implements OnInit {
     user = new BehaviorSubject<User>(null)
 
     private apiUrl = 'http://localhost:5000/users'
@@ -39,18 +37,24 @@ export class AuthService implements OnInit
     }
 
     handleAuthentication(tryToLoginUser: User) {
-        this.user.next({ ...tryToLoginUser })
+        this.user.next({ ...tryToLoginUser, transactions: [...tryToLoginUser.transactions] })
         localStorage.setItem('userData', JSON.stringify(tryToLoginUser))
         this.router.navigate(['homepage'])
     }
 
-    updateUser(newUser:User)
-    {
-      this.user.next({...newUser})
-      localStorage.setItem('userData', JSON.stringify(newUser))
+    updateUser(newUser: User) {
+        this.user.next({ ...newUser, transactions: [...newUser.transactions] })
+        localStorage.setItem('userData', JSON.stringify(newUser))
+    }
 
-      
-
+    autoLogin() {
+        const userData: User = JSON.parse(localStorage.getItem('userData'))
+        if (!userData) {
+            return
+        }
+        const loadedUser = { ...userData, transactions: [...userData.transactions] }
+        this.user.next(loadedUser)
+        this.router.navigate(['homepage'])
     }
 
     // TODO:autologin, autologout, maybe add token and auth-guard

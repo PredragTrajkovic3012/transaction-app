@@ -1,0 +1,43 @@
+<form action="" [formGroup]="addOrEditTransactionFormGroup" (ngSubmit)="submitForm()">
+    <div class="flex flex-column align-items-center h-screen gap-2 mt-3">
+        <input type="text" pInputText placeholder="purchedItem" class="w-10 md:w-3" formControlName="purchedItem" />
+        <p-inputNumber
+            inputId="integeronly"
+            placeholder="Account amount"
+            [inputStyle]="{ width: '100%' }"
+            [style]="{ width: '100%' }"
+            formControlName="amountSpent"
+            class="w-10 md:w-3"
+        >
+        </p-inputNumber>
+        <p-calendar
+            placeholder="Select date Time"
+            formControlName="dateTime"
+            [showIcon]="true"
+            [showTime]="true"
+            class="w-10 md:w-3"
+            [inputStyle]="{ width: '100%' }"
+            [style]="{ width: '100%' }"
+        >
+        </p-calendar>
+        <div
+            *ngFor="let category of categories"
+            class="flex flex-row align-items-center p-1 border-round-lg surface-0 w-10 md:w-3 shadow-1 gap-1 hover:shadow-2 hover:bg-green-100 h-3rem gap-1"
+        >
+            <p-radioButton value="{{ category.key }}" formControlName="category"></p-radioButton>
+            <label class="text-sm font-medium" [for]="category.key">{{ category.name }}</label>
+            <img src="../../../assets/shared/trcategoryicons/{{ category.key }}.png" height="30" />
+        </div>
+        <div class="flex flex-row justify-content-center mt-3 w-10 md:w-8">
+            <p-button
+                label="{{ dialogConfig.data.mode === 'add' ? 'Add transaction' : 'Edit transaction' }}"
+                icon="pi pi-database"
+                iconPos="right"
+                styleClass="p-button-success"
+                type="submit"
+                [disabled]="!addOrEditTransactionFormGroup.valid"
+            ></p-button>
+        </div>
+    </div>
+</form>
+

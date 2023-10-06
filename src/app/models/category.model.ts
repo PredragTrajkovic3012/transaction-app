@@ -1,5 +1,5 @@
 export enum Category {
-    Bills,
+    Bills = 1,
     Food,
     Debts,
     Leisure,

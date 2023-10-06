@@ -13,7 +13,9 @@ import { TransactionsComponent } from './components/transactions/transactions.co
 import { AmountEditComponent } from './components/amount-edit/amount-edit.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http';
-import { AdminpanelComponent } from './components/adminpanel/adminpanel.component'
+import { AdminpanelComponent } from './components/adminpanel/adminpanel.component';
+
+import { AddEditTransactionComponent } from './components/transactions/add-edit-transaction/add-edit-transaction.component'
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { AdminpanelComponent } from './components/adminpanel/adminpanel.componen
         TransactionsComponent,
         AmountEditComponent,
         AdminpanelComponent,
+        AddEditTransactionComponent,
         
     ],
     imports: [BrowserModule, AppRoutingModule, PrimengModule, ReactiveFormsModule, BrowserAnimationsModule, HttpClientModule],

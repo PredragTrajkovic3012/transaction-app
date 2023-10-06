@@ -1,1 +1,87 @@
-<p>transactions works!</p>
+<!--confirmDialog-->
+<div class="card flex justify-content-center">
+    <p-toast></p-toast>
+    <p-confirmDialog
+        #cd
+        [style]="{ width: '50vw' }"
+        message="Please confirm that you want to delete transaction..."
+        icon="pi pi-trash"
+    >
+        <ng-template pTemplate="header">
+            <h3>Do you wanna delete Transaction</h3>
+        </ng-template>
+        <ng-template pTemplate="icon">
+            <i class="pi pi-user"></i>
+        </ng-template>
+        <ng-template pTemplate="message">
+            <p>Please confirm that you want to delete transaction</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+            <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        </ng-template>
+    </p-confirmDialog>
+</div>
+
+<!--Content Table-->
+<div class="flex flex-column align-items-center surface-100 h-screen">
+    <div
+        class="flex flex-column align-items-center py-4 border-round-lg surface-0 w-10 w-11 md:w-7 xl:w-7 md:h-11 shadow-3 gap-1 hover:shadow-6 mt-6"
+    >
+        <h1 class="text-800 font-semibold text-4xl text-center hover:text-900">Transactions</h1>
+        <p-button
+            label="Add transaction"
+            icon="pi pi-plus-circle"
+            iconPos="right"
+            styleClass="p-button-success"
+            type="button"
+            (onClick)="openAddorEditDialog('add')"
+        ></p-button>
+        <div class="card mt-2">
+            <p-table
+                [value]="transactions"
+                [breakpoint]="'960px'"
+                [responsive]="true"
+                [scrollDirection]="'horizontal'"
+                [style]="{ width: 'auto' }"
+                responsiveLayout="stack"
+            >
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th>purchedItem</th>
+                        <th>Date & Time</th>
+                        <th>Category</th>
+                        <th>Amount Spent</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-transaction let-columns="columns">
+                    <tr>
+                        <td>{{ transaction?.purchedItem }}</td>
+                        <td>{{ transaction?.dateTime | date: 'short' }}</td>
+                        <td>
+                            <img src="../../../assets/shared/trcategoryicons/{{ transaction?.category }}.png" height="40" />
+                        </td>
+                        <td>{{ transaction?.amountSpent | currency: 'USD' }}</td>
+                        <td>
+                            <p-button
+                                icon="pi pi-file-edit"
+                                styleClass="p-button-rounded p-button-success"
+                                (onClick)="openAddorEditDialog('edit', transaction)"
+                            ></p-button>
+                        </td>
+                        <td>
+                            <p-button
+                                icon="pi pi-times"
+                                styleClass="p-button-rounded p-button-danger"
+                                (onClick)="deleteTransaction(transaction)"
+                            ></p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+

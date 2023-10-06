@@ -28,7 +28,7 @@
                             "src/assets",
                             {
                                 "glob": "**/*css",
-                                "input": "node_modules/primeng/resources/themes/saga-orange",
+                                "input": "node_modules/primeng/resources/themes/saga-green",
                                 "output": "/assets/light/"
                             },
                             {
